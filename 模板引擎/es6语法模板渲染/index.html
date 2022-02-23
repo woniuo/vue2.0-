@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>es6反引号模板</title>
+</head>
+<body>
+<ul id="box"></ul>
+<script type="text/javascript">
+    let data = [
+                    {name: '张三',sex: '男',age: 18},
+                    {name: '李四',sex: '男',age: 12},
+                    {name: '王五',sex: '女',age: 28}
+                ]
+    let template = ''
+    for (let i = 0;  i < data.length; i++) {
+        template += `
+                 <li>
+                    <span>姓名：${data[i].name}</span><br>
+                    <span>性别: ${data[i].sex}</span><br>
+                    <span>年龄: ${data[i].age}</span>
+                 </li> `
+    }
+
+    console.log(template)
+    const boxDom = document.querySelector('#box')
+    boxDom.innerHTML = template
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue指令和生命周期</title>
+</head>
+<body>
+<div id="app">
+    {{m.n.b}}
+    <br>
+    <input type="text" v-model="m.n.b">
+    <ul>
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+    </ul>
+    <button  onclick="add()">加1</button>
+</div>
+<script src="/xuni/bundle.js"></script>
+<script type="text/javascript">
+   const vm =  new Vue({
+        el: '#app',
+        data: {
+            a: 'hello',
+            m: {
+                n: {
+                    b: 10
+                }
+            }
+        },
+       watch: {
+            a() {
+                console.log('watch - a')
+            }
+       }
+    })
+   function add() {
+       vm.m.n.b++
+   }
+   console.log(vm)
+</script>
+</body>
+</html>

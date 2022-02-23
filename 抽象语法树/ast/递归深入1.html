@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    // 输出斐波那契数列的前10项 1,1,2,3,5,8,13,21,34,55
+    // 定义一个缓存对象，防止多次重复计算
+    let cache = {}
+    // 创建一个函数，功能是返回下标为n的这项的数字
+    function fib(n) {
+        console.count('计算次数')
+        // 判断缓存对象中是否有这个值，如果有，直接用
+        if (cache.hasOwnProperty(n)) {
+            return cache[n]
+        }
+        // 缓存对象中没有这个值
+        // 看看下标n是不是0 或者是不是1 ，如果是，就返回常数1
+        // 如果不是，就递归
+        let v = n === 1 || n === 0 ? 1 : fib(n-1) + fib(n-2)
+        cache[n] = v
+        return v
+    }
+
+    console.log(fib(10))
+</script>
+</body>
+</html>

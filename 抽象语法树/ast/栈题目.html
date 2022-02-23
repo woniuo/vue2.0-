@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    // 编写"智能重复"smartRepeat函数,实现:
+    // 将3[abc] 变为 abcabcabc
+    // 将3[2[a]2[b]]变为 aabbaabbaabb
+    // 将2[1[a]3[b]2[3[c]4[d]]] 变为abbbcccddddbbbcccddddbbbcccdddd
+    let rest = '3[2[a]2[b]]'
+    function smartRepeat(templateStr) {
+        // 指针
+        let index = 0
+        // 栈1，存放数字
+        let stack1 = []
+        // 栈2，存放临时字符串
+        let stack2 = []
+
+        while (index < templateStr.length - 1) {
+            // 剩余部分
+            rest = templateStr.substring(index)
+            // 看当前剩余部分是不是以数字和[开头
+            if (/^\d+\[/.test(rest)) {
+               let times = Number(rest.match(/^(\d+)\[/)[1])
+                // 把数字压栈，把空字符串压栈
+                stack1.push(times)
+                stack2.push('')
+                // 让指针后移，times 这个数字是多少位就后移多少位加1
+                // 为什么要加1呢? 加的1位是[
+                index += times.toString().length + 1
+            }else if (/^\w+\]/.test(rest)) {
+                // 如果这个字符是字母，那么此时就把栈顶这项改为这个字母
+                let word = rest.match(/^(\w+)\]/)[1]
+                stack2[stack2.length -1] = word
+               // 让指针后移，word 这个词语是多少位就后移多少位
+                index += word.length
+            }else if (rest[0] === ']') {
+                // 如果这个字符串是]，那么久将stack1弹栈，stack2弹栈,把字符串栈的新栈顶的元素
+                // 重复刚刚弹出的那个字符串指定的次数拼接到新栈顶上
+                let times = stack1.pop()
+                let word = stack2.pop()
+                // repeat 是es6的方法,比如'a'.repeat(3),得到'aaa'
+                stack2[stack2.length -1] += word.repeat(times)
+                index ++
+            }
+        }
+        // while 结束之后，stack1 和stack2 中肯定还剩余1项，如果剩的个数不对，那就是用户问题
+        // 方括号没有闭合等问题
+        return stack2[0].repeat(stack1[0])
+
+    }
+    let result = smartRepeat(rest)
+    console.log(result)
+</script>
+</body>
+</html>

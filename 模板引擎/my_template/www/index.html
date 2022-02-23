@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box"></div>
+<script src="/xuni/bundle.js"></script>
+<script type="text/javascript">
+    const template = `
+     <ul>
+           {{#arr}}
+            <li class="item">
+            <span>姓名：{{name}}</span><br>
+            <span>性别: {{sex}}</span><br>
+            <span>年龄: {{age}}</span>
+            <div>
+                <span>爱好: </span>
+                {{#hobbies}}
+                【{{.}}】
+                {{/hobbies}}
+            </div>
+            </li>
+            {{/arr}}
+        </ul>
+    `
+    // 2. 定义数据
+    let data = {
+        arr: [
+            {name: '张三',sex: '男',age: 18,hobbies: ['跑步','打篮球','打游戏']},
+            {name: '李四',sex: '男',age: 12,hobbies: ['滑雪','跳绳']},
+            {name: '王五',sex: '女',age: 28,hobbies: ['骑行','唱歌']}
+        ]
+    }
+    let domStr =  MyTemplate.render(template,data)
+    const boxDom = document.querySelector('#box')
+    boxDom.innerHTML = domStr
+    console.log(domStr)
+</script>
+</body>
+</html>

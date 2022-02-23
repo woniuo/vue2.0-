@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    // 找出连续重复最多的字符串
+    let str = 'aaaabbbbdddeweeffffffffwwwwwwwsss'
+    // 指针
+    let i = 0, // 头
+        j = 1, // 尾巴
+        maxRepeatCount = 0,
+        maxRepeatChar = ''
+    // 当前i 还在范围内的时候，应该继续寻找
+    while(i <= str.length -1) {
+        if (str[i] !== str[j]) {
+            if (maxRepeatCount < j - i) {
+                maxRepeatCount = j - i
+                maxRepeatChar = str[i]
+            }
+            i = j
+        }
+        j ++
+    }
+    console.log(maxRepeatChar,maxRepeatCount)
+</script>
+</body>
+</html>

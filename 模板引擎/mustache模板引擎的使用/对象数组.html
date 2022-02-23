@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mustache模板引擎的使用</title>
+</head>
+<body>
+<div id="box"></div>
+<script src="./js/mustache.js"></script>
+<script type="text/javascript">
+    // 1. 定义模板
+    const template = `
+        <ul>
+           {{#arr}}
+            <li>
+            <span>姓名：{{name}}</span><br>
+            <span>性别: {{sex}}</span><br>
+            <span>年龄: {{age}}</span>
+            </li>
+            {{/arr}}
+        </ul>
+    `
+    // 2. 定义数据
+    let data = {
+        arr: [
+            {name: '张三',sex: '男',age: 18},
+            {name: '李四',sex: '男',age: 12},
+            {name: '王五',sex: '女',age: 28}
+        ]
+    }
+    // 3. 生成dom
+   let domTml = Mustache.render(template,data) // 生成dom模板对象
+    console.log(domTml)
+    // 4. 渲染
+    const boxDom = document.querySelector('#box')
+    boxDom.innerHTML = domTml
+
+</script>
+</body>
+</html>
